@@ -16,7 +16,7 @@ ap.add_argument("-c", "--crop", type=int, default=0,
 args = vars(ap.parse_args())
 
 # grab the paths to the input images and initialize our images list
-print("[INFO] loading images...")
+print("[INFO] 正在加载图片...")
 imagePaths = sorted(list(paths.list_images(args["images"])))
 images = []
 
@@ -27,7 +27,7 @@ for imagePath in imagePaths:
     images.append(image)
 
 # initialize OpenCV's image sticher object and then perform the image stitching
-print("[INFO] stitching images...")
+print("[INFO] 图像拼接中...")
 stitcher = cv2.createStitcher() if imutils.is_cv3() else cv2.Stitcher_create()
 (status, stitched) = stitcher.stitch(images)
 
@@ -36,7 +36,7 @@ if status == 0:
     # check to see if we supposed to crop out the largest rectangular region from the stitched image
     if args["crop"] > 0:
         # create a 10 pixel border surrounding the stitched image
-        print("[INFO] cropping...")
+        print("[INFO] 裁剪中...")
         stitched = cv2.copyMakeBorder(stitched, 10, 10, 10, 10,
                                       cv2.BORDER_CONSTANT, (0, 0, 0))
 
